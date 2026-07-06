@@ -854,12 +854,12 @@ function importJSON(input) {
 
 // ===== Toast =====
 let toastTimer = null;
-function toast(msg) {
+function toast(msg, duration = 2600) {
   const el = document.getElementById("toast");
   el.textContent = msg;
   el.classList.add("show");
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => el.classList.remove("show"), 2600);
+  toastTimer = setTimeout(() => el.classList.remove("show"), duration);
 }
 
 // ===== URL 接收（快捷指令入口）=====
@@ -898,7 +898,7 @@ function handleIncomingURL() {
       rawSource: raw,
       createdVia: "sms-auto"
     });
-    toast("已自动记账 " + fmt(p.amount) + (p.merchant ? " · " + p.merchant : ""));
+    toast("✅ 已自动记账 " + fmt(p.amount) + (p.merchant ? " · " + p.merchant : ""), 6000);
   } else {
     openParseSheet(raw);
   }
